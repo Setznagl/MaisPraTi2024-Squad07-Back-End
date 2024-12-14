@@ -41,7 +41,11 @@ A solução busca proporcionar segurança, agilidade e transparência em todos o
 2. **Backend**: API para gerenciar a lógica de negócios e integrações de segurança.
 3. **Banco de Dados**: Estruturas para armazenar perfis, veículos, solicitações de locação e avaliações.
 4. **Administração**: Painel para suporte e supervisão.
-5. 
+
+## Requerimentos de Back-End para execução do projeto:
+JDK(Java Development Kit 17), para este projeto foi utilizado a distribuição Amazon Corretto cujo link de download se encontra logo abaixo:
+
+Download: https://docs.aws.amazon.com/corretto/latest/corretto-17-ug/downloads-list.html
 ---
 Este README será atualizado conforme o projeto evolui.
 
