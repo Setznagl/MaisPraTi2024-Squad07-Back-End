@@ -1,0 +1,17 @@
+services:
+  mysql:
+    container_name: alucar_production
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: alucar_production
+      MYSQL_USER: superadmin
+      MYSQL_PASSWORD: "204060"
+      MYSQL_ROOT_PASSWORD: "204060"
+    ports:
+      - "3307:3307"
+    volumes:
+      - ./PersistanceLog/mysql-data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    command:
+      - -p 3307
