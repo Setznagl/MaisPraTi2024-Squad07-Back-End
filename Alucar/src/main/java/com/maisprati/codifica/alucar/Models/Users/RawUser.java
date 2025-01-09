@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 
 @Entity
-public class RawUser {
+public class RawUser<T> {
 
     public RawUser() {
         //Empty constructor

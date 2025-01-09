@@ -1,5 +1,9 @@
 package com.maisprati.codifica.alucar.Lambdas;
 
-public class lbd {
+import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.function.Consumer;
+
+public class lbd {
+    Consumer<JpaRepository<>>
 }
