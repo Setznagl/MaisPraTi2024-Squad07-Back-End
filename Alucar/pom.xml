@@ -116,7 +116,6 @@
         <dependency>
             <groupId>jakarta.persistence</groupId>
             <artifactId>jakarta.persistence-api</artifactId>
-            <version>10.0.0</version>
         </dependency>
 
     </dependencies>
