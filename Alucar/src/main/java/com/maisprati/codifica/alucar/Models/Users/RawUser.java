@@ -1,14 +1,12 @@
 package com.maisprati.codifica.alucar.Models.Users;
 
 import jakarta.persistence.*;
-import lombok.*;
 
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
-@Data
-@Builder
 @Entity
 public class RawUser {
 
@@ -34,9 +32,6 @@ public class RawUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    ///////////////////////////////////////////////////
-
     /**
      * Campos "birthdate" e "cpf" não constam no protótipo para cadastro, serão atribuídos ao usuário
      * no que seria a consulta dos documentos via API que no nosso projeto será feita via JSON/Mock
@@ -68,4 +63,52 @@ public class RawUser {
     @Column(/*(nullable = true)*/)
     private byte[] photo;
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public Long getId(){return id;}
+    public void setId(Long id){this.id = id;}
+
+    public String getName(){return name;}
+    public void setName(String name){this.name = name;}
+
+    public String getEmail(){return email;}
+    public void setEmail(String email){this.email = email;}
+
+    public String getPassword(){return password;}
+    public void setPassword(String password){this.password = password;}
+
+    public String getCpf(){return cpf;}
+    public void setCpf(String cpf){this.cpf = cpf;}
+
+    public Date getBirthdate(){return birthdate;}
+    public void setBirthdate(Date birthdate){this.birthdate = birthdate;}
+
+    public String getPhone(){return phone;}
+    public void setPhone(String phone){this.phone = phone;}
+
+    public Integer getAverage_rating(){return average_rating;}
+    public void setAverage_rating(Integer average_rating){this.average_rating = average_rating;}
+
+    public Timestamp getCreated_at(){return created_at;}
+    public void setCreated_at(Timestamp created_at){this.created_at = created_at;}
+
+    public byte[] getPhoto(){return photo;}
+    public void setPhoto(byte[] photo){this.photo = photo;}
+
+    @Override
+    public String toString() {
+        return "RawUser{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", birthdate=" + birthdate +
+                ", phone='" + phone + '\'' +
+                ", average_rating=" + average_rating +
+                ", created_at=" + created_at +
+                ", photo=" + Arrays.toString(photo) +
+                '}';
+    }
 }
+
