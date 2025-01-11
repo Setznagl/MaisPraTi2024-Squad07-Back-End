@@ -1,10 +1,12 @@
 Para executar a imagem Docker referente ao banco de dados do projeto é necessário:
 
-1- Acessar a pasta "Alucar_Production"
+1- Possuir o Docker instalado na máquina com virtualização ativa na BIOS
 
-2- Acessando a partir da pasta acima abrir o terminal de comando CMD, Powershell ou similares via botão direito do mouse;
+2- Acessar a pasta "Alucar_Production"
 
-3- Executar o comando "  docker-compose up -d   " para subir a imagem do container que emula o banco MySQL;
+3- Acessando a partir da pasta acima abrir o terminal de comando CMD, Powershell ou similares via botão direito do mouse;
+
+4- Executar o comando "  docker-compose up -d   " para subir a imagem do container que emula o banco MySQL;
 
 OBS: A imagem permanece ativa até que seja pausada ou deletada, mesmo quando a aplicação Spring já foi encerrada.
 
