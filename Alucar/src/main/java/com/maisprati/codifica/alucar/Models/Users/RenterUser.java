@@ -4,7 +4,8 @@ import jakarta.persistence.Entity;
 
 @Entity
 public class RenterUser extends RawUser{
-    /*
+    public RenterUser(){/*Empty constructor*/}
+    /**
      * Atributos Herdados de RawUser:
      *      private String cpf;
      *      private String name;
@@ -16,10 +17,7 @@ public class RenterUser extends RawUser{
      *      private java.sql.Timestamp created_at;
      *      private byte[] photo;
      */
-    public RenterUser() {
-       super();
-        /*
-         * Dados provisórios para previnir NullPointerException
-         */
+    public RenterUser(String parameter_name , String parameter_email , String parameter_password) {
+        super(parameter_name , parameter_email , parameter_password);
     }
 }

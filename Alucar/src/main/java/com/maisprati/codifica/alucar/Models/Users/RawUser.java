@@ -95,20 +95,5 @@ public class RawUser {
     public byte[] getPhoto(){return photo;}
     public void setPhoto(byte[] photo){this.photo = photo;}
 
-    @Override
-    public String toString() {
-        return "RawUser{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", cpf='" + cpf + '\'' +
-                ", birthdate=" + birthdate +
-                ", phone='" + phone + '\'' +
-                ", average_rating=" + average_rating +
-                ", created_at=" + created_at +
-                ", photo=" + Arrays.toString(photo) +
-                '}';
-    }
 }
 
