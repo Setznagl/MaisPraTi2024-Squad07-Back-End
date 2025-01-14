@@ -20,28 +20,35 @@ public interface DriverUserRepository extends JpaRepository<DriverUser , Long> ,
 
     @Query  ("UPDATE DriverUser p SET" +
             " p.name =  :newName  ,  p.email = :newEmail , p.phone = :newPhone ," +
-            " p.location = :newUF , p.instagram = :newInstagram ," +
-            " p.criminal_record = :newCAC , p.cnh = :newCNH " +
-            " WHERE p.id = :id ")
-    Void fromUser_updateDriverUserName
+            " p.location = :newUF , p.instagram = :newInstagram WHERE p.id = :id ")
+        Void fromUser_updateDriverUserName
             (@Param("parameterId") Long id,
              @Param("parameterNewName") String newName,
              @Param("paremeterNewEmail") String newEmail,
              @Param("parameterNewPhone") String newPhone,
              @Param("parameterNewUF") UF newUF,
-             @Param("parameterInstagram") String newInstagram,
-             @Param("parameterCAC") byte[] newCAC,
-             @Param("parameterCNH") byte[] newCNH);
+             @Param("parameterInstagram") String newInstagram);
 
+
+
+    @Query ("UPDATE DriverUser p SET p.cnh = :newCNH")
+        void updateCnh(@Param("newCNH") byte[] newCNH);
+
+
+    @Query ("UPDATE DriverUser p SET p.criminal_record = :newCAC")
+        void updateCAC(@Param("newCAC") byte[] newCAC);
 
 
     @Query  ("UPDATE DriverUser p SET" +
-            " p.cpf = :newCPF , p.birthdate = :newBirthdate , p.cnh_expiration_date = :newCNHexpirationDate WHERE p.id = :id ")
-    Void fromAPI_updateDriverUserName
+            " p.cpf = :newCPF , p.birthdate = :newBirthdate , " +
+            " p.cnh_expiration_date = :newCNHexpirationDate , p.verified = :newVerified " +
+            " WHERE p.id = :id ")
+        Void fromAPI_updateDriverUserName
             (@Param("parameterId") Long id,
-             @Param("parameterCPF") String newCPF,
+             @Param("parameterNewCPF") String newCPF,
              @Param("paremeterNewBirthdate") Date newBirthdate,
-             @Param("parameterNewCNHexpirationDate") Date newCNHexpirationDate);
+             @Param("parameterNewCNHexpirationDate") Date newCNHexpirationDate,
+             @Param("parameterNewVerified") Boolean newVerified);
 
 
 

@@ -1,4 +1,4 @@
-package com.maisprati.codifica.alucar.Util;
+package com.maisprati.codifica.alucar.Util.FileReader;
 
 import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class CNH_Extraction implements PDFUtils {
 
-    public static Map<String , String> extractValuesFromPDF(byte[] pdfbytes) throws IOException {
+    public static Map<String , String> extractCNH_AllValuesFromPDF(byte[] pdfbytes) throws IOException {
         Path tempFile = PDFUtils.convertBytesToFile(pdfbytes);
         try (PDDocument document = Loader.loadPDF(Files.newInputStream(tempFile).readAllBytes())) {
             PDFTextStripper pdfstripper = new PDFTextStripper();
@@ -37,8 +37,29 @@ public class CNH_Extraction implements PDFUtils {
                 if (line.contains("CAT. HAB.:")) extractedFields.put("Categoria de Habilitação", PDFUtils.extractField(line, "CAT. HAB.:")); }
 
             return extractedFields;
-        } finally {
-            Files.deleteIfExists(tempFile);
+        } finally {Files.deleteIfExists(tempFile);
+      }
+    }
+    public static Map<String , String> extractCNH_EssentialValuesFromPDF(byte[] pdfbytes) throws IOException {
+        Path tempFile = PDFUtils.convertBytesToFile(pdfbytes);
+        try (PDDocument document = Loader.loadPDF(Files.newInputStream(tempFile).readAllBytes())) {
+            PDFTextStripper pdfstripper = new PDFTextStripper();
+            String text = pdfstripper.getText(document);
+
+            // Extraindo campos específicos
+            String[] lines = text.split("\\r?\\n");
+            Map<String , String> extractedFields = new HashMap<>();
+
+            for (String line : lines){
+                if (line.contains("NOME:")) extractedFields.put("Nome", PDFUtils.extractField(line, "NOME:"));
+                if (line.contains("Nº REGISTRO:")) extractedFields.put("Número de Registro", PDFUtils.extractField(line, "Nº REGISTRO:"));
+                if (line.contains("CPF:")) extractedFields.put("CPF", PDFUtils.extractField(line, "CPF:"));
+                if (line.contains("DATA NASCIMENTO:")) extractedFields.put("Data de Nascimento", PDFUtils.extractField(line, "DATA NASCIMENTO:"));
+                if (line.contains("VALIDADE:")) extractedFields.put("Validade", PDFUtils.extractField(line, "VALIDADE:"));
+                if (line.contains("1ª HABILITAÇÃO:")) extractedFields.put("Primeira Habilitação", PDFUtils.extractField(line, "1ª HABILITAÇÃO:"));}
+
+            return extractedFields;
+        } finally {Files.deleteIfExists(tempFile);
         }
     }
 }

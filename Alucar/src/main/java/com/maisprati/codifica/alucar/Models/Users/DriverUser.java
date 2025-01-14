@@ -7,7 +7,7 @@ import java.sql.Date;
 
 @Entity
 public class DriverUser extends RawUser{
-    public DriverUser(){/*Empty constructor*/}
+    protected DriverUser(){/*Empty constructor*/}
     /**
      * Atributos Herdados de RawUser:
      *      private String cpf;

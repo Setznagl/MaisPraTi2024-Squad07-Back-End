@@ -4,7 +4,7 @@ import jakarta.persistence.Entity;
 
 @Entity
 public class RenterUser extends RawUser{
-    public RenterUser(){/*Empty constructor*/}
+    protected RenterUser(){/*Empty constructor*/}
     /**
      * Atributos Herdados de RawUser:
      *      private String cpf;

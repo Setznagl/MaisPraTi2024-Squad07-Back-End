@@ -1,4 +1,4 @@
-package com.maisprati.codifica.alucar.Util;
+package com.maisprati.codifica.alucar.Util.FileReader;
 
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
@@ -22,13 +22,11 @@ public interface PDFUtils {
             return data;
         }
     }
-
     static Path convertBytesToFile(byte[] pdfbytes) throws IOException {
         Path tempFilePath = Files.createTempFile("tempDoc" , ".pdf");
         Files.write(tempFilePath , pdfbytes);
         return tempFilePath;
     }
-
     static String extractField(String text, String fieldName) {
         int startIndex = text.indexOf(fieldName);
         if (startIndex == -1) {
@@ -42,13 +40,13 @@ public interface PDFUtils {
         return text.substring(startIndex, endIndex).trim();
     }
 
-    static void createPDFfile(
+    static void createCNH_PDFfile(
             String Nome , String DocIdentidade , String ORGemissor , String UF ,
             String CPF , String DataNascimento , String FiliacaoPai , String FiliacaoMae ,
             String NumeroRegistro , String Validade , String PrimeiraHabilitacao , String Categoria)
     {
         try {
-            String dest = "src/main/java/com/maisprati/codifica/alucar/Util/FileLoader/CNH_exemplo.pdf";
+            String dest = "src/main/java/com/maisprati/codifica/alucar/Util/FileReader/CNH_exemplo.pdf";
             PdfWriter writer = new PdfWriter(dest);
             PdfDocument pdf = new PdfDocument(writer);
             Document document = new Document(pdf);

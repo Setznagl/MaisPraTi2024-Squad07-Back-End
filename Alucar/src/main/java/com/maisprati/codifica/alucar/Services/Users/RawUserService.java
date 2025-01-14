@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.function.Predicate;
+
 import static com.maisprati.codifica.alucar.Lambdas.lbd.*;
 import static com.maisprati.codifica.alucar.Repository.DB.Users.RawUserRepository.*;
 
@@ -23,8 +25,16 @@ public class RawUserService {
     }
 
     public RawUser FindRawUserByEmail(String parameter_email){
-        return get_user_by_email.apply(rawUserRepository , parameter_email);
+        return (RawUser) get_user_by_email.apply(rawUserRepository , parameter_email);
     }
+
+    @SuppressWarnings({"unchecked" , "rawtypes"})
+    public void DeleteRawUserById(Long parameter_id){
+        delete_data_by_id.accept((JpaRepository) rawUserRepository , 1L);
+    }
+
+    public Predicate<String> check_available_email = (parameter_email ) ->
+            FindRawUserByEmail(parameter_email) == null;
 
     @Autowired
     public void setRawUserRepository(RawUserRepository rawUserRepository) {

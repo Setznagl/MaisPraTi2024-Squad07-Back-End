@@ -20,7 +20,7 @@ public class RawUserController_POST {
     @PostMapping
     @RequestMapping("/create")
     public ResponseEntity<Void> createRawUser(@RequestBody RawUser parameter_rawuser) {
-        boolean check = check_available_email.test(rawUserRepository , parameter_rawuser.getEmail());
+        boolean check = rawUserService.check_available_email.test(parameter_rawuser.getEmail());
             if (check) {
                 rawUserService.InsertRawUser(parameter_rawuser);
                 return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -31,11 +31,8 @@ public class RawUserController_POST {
     }
 
 
-
-
     @Autowired
-    public RawUserController_POST(RawUserService rawUserService , RawUserRepository rawUserRepository) {
+    public RawUserController_POST(RawUserService rawUserService) {
         this.rawUserService = rawUserService;
-        this.rawUserRepository = rawUserRepository;
-    }private final RawUserService rawUserService;private final RawUserRepository rawUserRepository;
+    }private final RawUserService rawUserService;
 }
