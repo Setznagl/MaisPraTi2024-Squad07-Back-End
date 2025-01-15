@@ -30,7 +30,7 @@ public class RawUserService {
 
     @SuppressWarnings({"unchecked" , "rawtypes"})
     public void DeleteRawUserById(Long parameter_id){
-        delete_data_by_id.accept((JpaRepository) rawUserRepository , 1L);
+        delete_data_by_id.accept((JpaRepository) rawUserRepository , parameter_id);
     }
 
     public Predicate<String> check_available_email = (parameter_email ) ->

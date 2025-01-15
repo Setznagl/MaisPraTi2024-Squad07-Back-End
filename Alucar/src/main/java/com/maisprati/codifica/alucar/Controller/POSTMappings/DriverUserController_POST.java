@@ -5,6 +5,7 @@ import com.maisprati.codifica.alucar.Models.Users.RawUser;
 import com.maisprati.codifica.alucar.Services.Users.DriverUserService;
 import com.maisprati.codifica.alucar.Services.Users.RawUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,10 +24,12 @@ public class DriverUserController_POST {
         boolean check = driverUserService.check_available_email.test(baseUser.getEmail());
         if (check) {
             DriverUser tempUser = conversion_raw_to_driver_user.apply(baseUser);
-            driverUserService.InsertDriverUser(tempUser);
             rawUserService.DeleteRawUserById(baseUser.getId());
+            driverUserService.InsertDriverUser(tempUser);
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        }else {
+            return ResponseEntity.status(HttpStatus.IM_USED).build();
         }
-        return null;
     }
 
 

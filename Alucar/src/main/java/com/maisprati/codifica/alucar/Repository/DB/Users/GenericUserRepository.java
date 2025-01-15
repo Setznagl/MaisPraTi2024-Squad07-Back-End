@@ -25,7 +25,6 @@ public interface GenericUserRepository{
     };
     Function<RawUser , DriverUser> conversion_raw_to_driver_user = (parameterRawUser) ->{
         DriverUser temp = new DriverUser(parameterRawUser.getName(), parameterRawUser.getEmail(), parameterRawUser.getPassword());
-            temp.setId(parameterRawUser.getId());
             temp.setCpf(parameterRawUser.getCpf());
             temp.setBirthdate(parameterRawUser.getBirthdate());
             temp.setPhone(parameterRawUser.getPhone());

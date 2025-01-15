@@ -9,11 +9,7 @@ import java.util.Arrays;
 
 @Entity
 public class RawUser {
-
-    public RawUser() {
-        //Empty constructor
-    }
-
+    protected RawUser(){/*Empty constructor*/}
     public RawUser(String parameter_name , String parameter_email , String parameter_password){
         this.name = parameter_name;
         this.email = parameter_email;

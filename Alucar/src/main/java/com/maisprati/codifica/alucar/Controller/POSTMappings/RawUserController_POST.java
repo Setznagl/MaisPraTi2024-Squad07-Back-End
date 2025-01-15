@@ -1,7 +1,6 @@
 package com.maisprati.codifica.alucar.Controller.POSTMappings;
 
 import com.maisprati.codifica.alucar.Models.Users.RawUser;
-import com.maisprati.codifica.alucar.Repository.DB.Users.RawUserRepository;
 import com.maisprati.codifica.alucar.Services.Users.RawUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,8 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import static com.maisprati.codifica.alucar.Repository.DB.Users.RawUserRepository.*;
 
 @RestController
 @RequestMapping("/account")
