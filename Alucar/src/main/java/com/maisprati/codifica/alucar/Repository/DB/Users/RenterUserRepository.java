@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 //Abstraction of the JPA Hibernate DAO and C.R.U.D functions
 @Repository
-public interface RenterUserRepository extends JpaRepository<RenterUser, Long> {
+public interface RenterUserRepository extends JpaRepository<RenterUser, Long> , GenericUserRepository {
 
     // JPQL
     @Query("SELECT p FROM RenterUser p WHERE p.email = :email")

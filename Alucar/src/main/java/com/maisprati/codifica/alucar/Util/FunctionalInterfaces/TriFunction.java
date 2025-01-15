@@ -1,4 +1,4 @@
-package com.maisprati.codifica.alucar.Util;
+package com.maisprati.codifica.alucar.Util.FunctionalInterfaces;
 
 @FunctionalInterface
 public interface TriFunction<T, U, V, R> {

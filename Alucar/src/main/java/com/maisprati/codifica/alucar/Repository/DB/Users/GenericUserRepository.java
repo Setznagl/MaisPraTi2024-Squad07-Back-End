@@ -20,8 +20,7 @@ public interface GenericUserRepository{
         }else
         if (jparepository instanceof RenterUserRepository conversion) {
             return conversion.findRenterUserByEmail(parameter_email);
-        }
-        else return null;
+        } else return null;
     };
     Function<RawUser , DriverUser> conversion_raw_to_driver_user = (parameterRawUser) ->{
         DriverUser temp = new DriverUser(parameterRawUser.getName(), parameterRawUser.getEmail(), parameterRawUser.getPassword());
