@@ -13,8 +13,9 @@ public class RenterUserController_GET {
 
     @GetMapping("get-re-user")
     public ResponseEntity<RenterUser> getDriverUser_ByEmail(@RequestParam("email") String parameter_email) {
-        boolean check = renterUserService.check_available_email.test(parameter_email);
-        if (!check){ RenterUser target = renterUserService.FindRenterUserByEmail(parameter_email);
+            boolean check_one = renterUserService.check_available_email.test(parameter_email);
+            boolean check_two = renterUserService.check_email_from_renteruser.test(parameter_email);
+        if (!check_one && check_two){ RenterUser target = renterUserService.FindRenterUserByEmail(parameter_email);
             return ResponseEntity.ok(target);
         }else {return ResponseEntity.notFound().build();}
     }

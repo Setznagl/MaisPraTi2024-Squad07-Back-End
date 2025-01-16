@@ -1,5 +1,6 @@
 package com.maisprati.codifica.alucar.Services.Users;
 
+import com.maisprati.codifica.alucar.Models.Users.DriverUser;
 import com.maisprati.codifica.alucar.Models.Users.RenterUser;
 import com.maisprati.codifica.alucar.Repository.DB.Users.RenterUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,11 @@ import static com.maisprati.codifica.alucar.Repository.DB.Users.GenericUserRepos
 
 @Service
 public class RenterUserService {
-    public Predicate<String> check_available_email = (parameter_email) -> FindRenterUserByEmail(parameter_email) == null;
+    @Autowired
+    public void setRenterUserRepository(RenterUserRepository renterUserRepository) {
+        this.renterUserRepository = renterUserRepository;
+    }RenterUserRepository renterUserRepository;
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     @SuppressWarnings({"unchecked","rawtypes"})
     public void InsertRenterUser(RenterUser renterUser) {
@@ -32,8 +37,16 @@ public class RenterUserService {
     @SuppressWarnings({"unchecked","rawtypes","unused"})
     public void DeleteRenterUserById(Long parameter_id){delete_data_by_id.accept((JpaRepository) renterUserRepository , parameter_id);}
 
-    @Autowired
-    public void setRenterUserRepository(RenterUserRepository renterUserRepository) {
-        this.renterUserRepository = renterUserRepository;
-    }RenterUserRepository renterUserRepository;
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public Predicate<String> check_available_email = (parameter_email) -> FindRenterUserByEmail(parameter_email) == null;
+
+    public Predicate<String> check_email_from_renteruser = (parameter_email ) -> {
+        RenterUser extracted_user = FindRenterUserByEmail(parameter_email);
+        boolean not_null_user = extracted_user != null;
+        if(not_null_user){
+            RenterUser example = new RenterUser("","","");
+            return extracted_user.equals(example);
+        } else return false;
+    };
 }

@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Objects;
 
 @Entity
 public class RawUser {
@@ -91,5 +92,7 @@ public class RawUser {
     public byte[] getPhoto(){return photo;}
     public void setPhoto(byte[] photo){this.photo = photo;}
 
+    @Override
+    public boolean equals(Object o) {return this == o || this.getClass() == o.getClass();}
 }
 

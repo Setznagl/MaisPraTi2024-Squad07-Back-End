@@ -2,6 +2,7 @@ package com.maisprati.codifica.alucar.Repository.DB.Users;
 
 import com.maisprati.codifica.alucar.Models.Users.DriverUser;
 import com.maisprati.codifica.alucar.Models.Users.RawUser;
+import com.maisprati.codifica.alucar.Models.Users.RenterUser;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -30,6 +31,16 @@ public interface GenericUserRepository{
             temp.setAverage_rating(parameterRawUser.getAverage_rating());
             temp.setCreated_at(parameterRawUser.getCreated_at());
             temp.setPhoto(parameterRawUser.getPhoto());
+        return temp;
+    };
+    Function<RawUser , RenterUser> conversion_raw_to_renter_user = (parameterRawUser) ->{
+        RenterUser temp = new RenterUser(parameterRawUser.getName(), parameterRawUser.getEmail(), parameterRawUser.getPassword());
+        temp.setCpf(parameterRawUser.getCpf());
+        temp.setBirthdate(parameterRawUser.getBirthdate());
+        temp.setPhone(parameterRawUser.getPhone());
+        temp.setAverage_rating(parameterRawUser.getAverage_rating());
+        temp.setCreated_at(parameterRawUser.getCreated_at());
+        temp.setPhoto(parameterRawUser.getPhoto());
         return temp;
     };
 }
