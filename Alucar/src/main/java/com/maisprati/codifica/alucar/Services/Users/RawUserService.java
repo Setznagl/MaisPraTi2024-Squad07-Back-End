@@ -39,11 +39,6 @@ public class RawUserService {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public Predicate<String> check_available_email = (parameter_email ) -> FindRawUserByEmail(parameter_email) == null;
-
-    /**
-     * Método Equals() sobrescrito da classe RawUser compara a classe para retornar se é igual ou não, caso sejam duas
-     * classes distintas irá retornar false e negar o acesso ao get-email por rotas GET de outros tipos de usuário
-     */
     public Predicate<String> check_email_from_rawuser = (parameter_email ) -> {
         RawUser extracted_user = FindRawUserByEmail(parameter_email);
         boolean not_null_user = extracted_user != null;
@@ -53,4 +48,5 @@ public class RawUserService {
         } else return false;
     };
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }

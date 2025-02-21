@@ -1,4 +1,4 @@
-package com.maisprati.codifica.alucar.Util;
+package com.maisprati.codifica.alucar.Util.Enum;
 
 public enum UF {
     AC("Acre", "AC"),

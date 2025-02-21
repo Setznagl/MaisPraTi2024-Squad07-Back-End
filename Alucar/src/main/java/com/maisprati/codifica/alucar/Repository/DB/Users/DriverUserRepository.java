@@ -1,7 +1,6 @@
 package com.maisprati.codifica.alucar.Repository.DB.Users;
 
 import com.maisprati.codifica.alucar.Models.Users.DriverUser;
-import com.maisprati.codifica.alucar.Util.UF;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -19,37 +18,21 @@ public interface DriverUserRepository extends JpaRepository<DriverUser , Long> ,
 
 
     @Query  ("UPDATE DriverUser p SET" +
-            " p.name =  :newName  ,  p.email = :newEmail , p.phone = :newPhone ," +
-            " p.location = :newUF , p.instagram = :newInstagram WHERE p.id = :id ")
-        Void fromUser_updateDriverUserName
+            " p.name = :newName , p.email = :newEmail , " +
+            " p.phone = :newPhone , p.location = :newLocation , " +
+            " p.photo = :newPhoto , p.instagram = :newInstagram , " +
+            " p.criminal_record = :newCriminalRecord , p.cnh = :newCNH , p.cnh_expiration_date = :newCNH_Expiration_Date " +
+            " WHERE p.id = :id ")
+    void Repository_Update_Driver_User
             (@Param("parameterId") Long id,
              @Param("parameterNewName") String newName,
              @Param("paremeterNewEmail") String newEmail,
              @Param("parameterNewPhone") String newPhone,
-             @Param("parameterNewUF") UF newUF,
-             @Param("parameterInstagram") String newInstagram);
-
-
-
-    @Query ("UPDATE DriverUser p SET p.cnh = :newCNH")
-        void updateCnh(@Param("newCNH") byte[] newCNH);
-
-
-    @Query ("UPDATE DriverUser p SET p.criminal_record = :newCAC")
-        void updateCAC(@Param("newCAC") byte[] newCAC);
-
-
-    @Query  ("UPDATE DriverUser p SET" +
-            " p.cpf = :newCPF , p.birthdate = :newBirthdate , " +
-            " p.cnh_expiration_date = :newCNHexpirationDate , p.verified = :newVerified " +
-            " WHERE p.id = :id ")
-        Void fromAPI_updateDriverUserName
-            (@Param("parameterId") Long id,
-             @Param("parameterNewCPF") String newCPF,
-             @Param("paremeterNewBirthdate") Date newBirthdate,
-             @Param("parameterNewCNHexpirationDate") Date newCNHexpirationDate,
-             @Param("parameterNewVerified") Boolean newVerified);
-
-
+             @Param("parameterNewLocation") String newLocation,
+             @Param("paramterNewPhoto") byte[] newPhoto,
+             @Param("parameterNewInstagram") String newInstagram,
+             @Param("parameterNewCriminalRecord") byte[] newCriminalRecord,
+             @Param("parameterNewCriminalRecord") byte[] newCNH,
+             @Param("parameterNewCriminalRecord") Date newCNH_Expiration_Date);
 
 }

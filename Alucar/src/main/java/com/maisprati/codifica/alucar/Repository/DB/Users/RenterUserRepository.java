@@ -14,4 +14,18 @@ RenterUserRepository extends JpaRepository<RenterUser, Long> , GenericUserReposi
     // JPQL
     @Query("SELECT p FROM RenterUser p WHERE p.email = :email")
     RenterUser findRenterUserByEmail(@Param("email") String email);
+
+    @Query  ("UPDATE RenterUser p SET" +
+            " p.name = :newName , p.email = :newEmail , " +
+            " p.phone = :newPhone , p.location = :newLocation , " +
+            " p.photo = :newPhoto , p.instagram = :newInstagram " +
+            " WHERE p.id = :id ")
+    void Repository_Update_Renter_User
+            (@Param("parameterId") Long id,
+             @Param("parameterNewName") String newName,
+             @Param("paremeterNewEmail") String newEmail,
+             @Param("parameterNewPhone") String newPhone,
+             @Param("parameterNewLocation") String newLocation,
+             @Param("paramterNewPhoto") byte[] newPhoto,
+             @Param("parameterNewInstagram") String newInstagram);
 }

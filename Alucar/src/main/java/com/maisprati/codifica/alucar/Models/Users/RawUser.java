@@ -5,8 +5,6 @@ import jakarta.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.Objects;
 
 @Entity
 public class RawUser {

@@ -1,5 +1,6 @@
 package com.maisprati.codifica.alucar.Models.Users;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
 @Entity
@@ -19,5 +20,24 @@ public class RenterUser extends RawUser{
      */
     public RenterUser(String parameter_name , String parameter_email , String parameter_password) {
         super(parameter_name , parameter_email , parameter_password);
+        /*
+         * Dados provisórios para previnir NullPointerException
+         */
+        this.location = " ";
+        this.instagram = " ";
     }
+
+    @Column/*(nullable = true)*/
+    private String location;
+
+    @Column/*(nullable = true)*/
+    private String instagram;
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public String getLocation(){return location;}
+    public void setLocation(String location){this.location = location;}
+
+    public String getInstagram(){return instagram;}
+    public void setInstagram(String instagram){this.instagram = instagram;}
 }

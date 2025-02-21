@@ -1,6 +1,5 @@
 package com.maisprati.codifica.alucar.Models.Users;
 
-import com.maisprati.codifica.alucar.Util.UF;
 import jakarta.persistence.*;
 
 import java.sql.Date;
@@ -29,7 +28,7 @@ public class DriverUser extends RawUser{
         this.cnh = " ".getBytes();
         this.cnh_expiration_date = Date.valueOf("1970-01-01");
         this.verified = false;
-        this.location = UF.XX;
+        this.location = " ";
         this.instagram = " ";
     }
 
@@ -42,13 +41,15 @@ public class DriverUser extends RawUser{
     @Column/*(nullable = true)*/
     private java.sql.Date cnh_expiration_date;
 
-    @Column(nullable = true)
-    private UF location;
-
-    @Column(nullable = true)
+    @Column/*(nullable = true)*/
     private Boolean verified;
 
-    @Column(nullable = true)
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    @Column/*(nullable = true)*/
+    private String location;
+
+    @Column/*(nullable = true)*/
     private String instagram;
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -62,11 +63,14 @@ public class DriverUser extends RawUser{
     public Date getCnh_expiration_date(){return cnh_expiration_date;}
     public void setCnh_expiration_date(Date cnh_expiration_date){this.cnh_expiration_date = cnh_expiration_date;}
 
+    @SuppressWarnings({"unused"})
     public Boolean getVerified(){return verified;}
     public void setVerified(Boolean verified){this.verified = verified;}
 
-    public UF getLocation(){return location;}
-    public void setLocation(UF location){this.location = location;}
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public String getLocation(){return location;}
+    public void setLocation(String location){this.location = location;}
 
     public String getInstagram(){return instagram;}
     public void setInstagram(String instagram){this.instagram = instagram;}

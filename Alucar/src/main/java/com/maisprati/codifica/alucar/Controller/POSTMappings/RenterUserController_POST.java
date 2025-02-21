@@ -1,5 +1,6 @@
 package com.maisprati.codifica.alucar.Controller.POSTMappings;
 
+import com.maisprati.codifica.alucar.Models.Users.DriverUser;
 import com.maisprati.codifica.alucar.Models.Users.RawUser;
 import com.maisprati.codifica.alucar.Models.Users.RenterUser;
 import com.maisprati.codifica.alucar.Services.Users.RawUserService;
@@ -18,6 +19,7 @@ import static com.maisprati.codifica.alucar.Repository.DB.Users.GenericUserRepos
 @RequestMapping("/account")
 public class RenterUserController_POST {
 
+    //CRUD - Create
     @PostMapping
     @RequestMapping("/create/renter")
     public ResponseEntity<Void> createRenterUser(@RequestBody RawUser baseUser) {
@@ -32,15 +34,31 @@ public class RenterUserController_POST {
         }
     }
 
+    //CRUD - Delete
+    @PostMapping @RequestMapping("/delete/renter")
+    public ResponseEntity<Void> deleteDriverUser(@RequestBody RenterUser baseUser) {
+        try {
+            renterUserService.DeleteRenterUserById(baseUser.getId());
+            return ResponseEntity.status(HttpStatus.OK).build();
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 
+    //CRUD - Update Simple data according FIGMA
+    @PostMapping @RequestMapping("/update/renter")
+    public ResponseEntity<Void> updateDriverUser(@RequestBody RenterUser submittedUser) {
+        try {
+            renterUserService.UpdateRenterUser(submittedUser);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 
     @Autowired
-    public RenterUserController_POST(
-            RenterUserService renterUserService ,
-            RawUserService rawUserService) {
+    public RenterUserController_POST(RenterUserService renterUserService , RawUserService rawUserService) {
         this.renterUserService = renterUserService;
         this.rawUserService = rawUserService;
-    }
-    private final RenterUserService renterUserService;
-    private final RawUserService rawUserService ;
+    }private final RenterUserService renterUserService;private final RawUserService rawUserService ;
 }
