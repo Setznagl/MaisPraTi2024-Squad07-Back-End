@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static com.maisprati.codifica.alucar.Repository.DB.Users.GenericUserRepository.*;
+import static com.maisprati.codifica.alucar.Lambdas.GenericUserRepository.*;
 
 @RestController
 @RequestMapping("/account")
@@ -48,16 +48,6 @@ public class DriverUserController_POST {
         }
     }
 
-    //CRUD - Update Simple data according FIGMA
-    @PostMapping @RequestMapping("/update/driver")
-    public ResponseEntity<Void> updateDriverUser(@RequestBody DriverUser submittedUser) {
-        try {
-            driverUserService.UpdateDriverUser(submittedUser);
-            return ResponseEntity.status(HttpStatus.OK).build();
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
 
     @Autowired
     public DriverUserController_POST(DriverUserService driverUserService, RawUserService rawUserService) {

@@ -4,12 +4,14 @@ import com.maisprati.codifica.alucar.Models.Users.RenterUser;
 import com.maisprati.codifica.alucar.Repository.DB.Users.RenterUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.function.Predicate;
 
 import static com.maisprati.codifica.alucar.Lambdas.lbd.*;
-import static com.maisprati.codifica.alucar.Repository.DB.Users.GenericUserRepository.*;
+import static com.maisprati.codifica.alucar.Lambdas.GenericUserRepository.*;
 
 @Service
 public class RenterUserService {
@@ -19,39 +21,43 @@ public class RenterUserService {
     }RenterUserRepository renterUserRepository;
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    //CRUD - Create
     @SuppressWarnings({"unchecked","rawtypes"})
     public void InsertRenterUser(RenterUser renterUser) {
         insert_data.apply((JpaRepository)renterUserRepository , renterUser);
     }
 
+    //CRUD - Read
     @SuppressWarnings({"unchecked","rawtypes","unused"})
     public RenterUser FindRenterUserById(Long parameter_id){
         return (RenterUser) find_data_by_id.apply((JpaRepository)renterUserRepository , parameter_id);
     }
 
+    //CRUD - Read
     public RenterUser FindRenterUserByEmail(String parameter_email){
         return (RenterUser) get_user_by_email.apply(renterUserRepository , parameter_email);
     }
 
+    //CRUD - Update
     public void UpdateRenterUser(RenterUser submittedUser){
         //Besides the ID is the same the submitted data probably will change
         RenterUser previousData = FindRenterUserById(submittedUser.getId());
         //Submit to lambda validate changes, null field new values will return previous actual data
         RenterUser treatedData = treat_renter_update.apply(previousData, submittedUser);
+        try {renterUserRepository.save(treatedData);}
+        catch (Exception e){System.out.println(e.getMessage());}
+    }
 
-        renterUserRepository.Repository_Update_Renter_User(
-                treatedData.getId(),
-                treatedData.getName(),
-                treatedData.getEmail(),
-                treatedData.getPhone(),
-                treatedData.getLocation(),
-                treatedData.getPhoto(),
-                treatedData.getInstagram()
-        );
-      }
-
-    @SuppressWarnings({"unchecked","rawtypes","unused"})
-    public void DeleteRenterUserById(Long parameter_id){delete_data_by_id.accept((JpaRepository) renterUserRepository , parameter_id);}
+    //CRUD - Delete
+    public void DeleteRenterUserById(Long parameter_id) throws HttpClientErrorException {
+        RenterUser temp = FindRenterUserById(parameter_id);
+        if(temp != null){
+            try{renterUserRepository.delete(temp);}
+            catch (Exception e){throw new HttpClientErrorException(
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    e.getMessage());}
+        }else{throw new HttpClientErrorException(HttpStatus.NOT_FOUND);}
+    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

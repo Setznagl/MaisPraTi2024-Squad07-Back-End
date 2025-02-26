@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class RenterUserController_GET {
 
+    //GET using Email
     @GetMapping("get-re-user")
-    public ResponseEntity<RenterUser> getDriverUser_ByEmail(@RequestParam("email") String parameter_email) {
+    public ResponseEntity<RenterUser> getRenterUser_ByEmail(@RequestParam("email") String parameter_email) {
             boolean check_one = renterUserService.check_available_email.test(parameter_email);
             boolean check_two = renterUserService.check_email_from_renteruser.test(parameter_email);
         if (!check_one && check_two){ RenterUser target = renterUserService.FindRenterUserByEmail(parameter_email);
@@ -20,6 +21,13 @@ public class RenterUserController_GET {
         }else {return ResponseEntity.notFound().build();}
     }
 
+    //GET using ID
+    @GetMapping("get-re-user/id/")
+    public ResponseEntity<RenterUser> getRenterUser_ByID(@RequestParam("id") Long parameter_id) {
+        RenterUser temp = renterUserService.FindRenterUserById(parameter_id);
+        if(temp != null){return ResponseEntity.ok(temp);}
+        else{return ResponseEntity.notFound().build();}
+    }
 
     @Autowired
     public RenterUserController_GET(RenterUserService renterUserService) {

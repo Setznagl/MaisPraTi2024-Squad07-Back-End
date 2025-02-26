@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class RawUserController_GET {
 
+    //GET using Email
     @GetMapping("get-r-user")
     public ResponseEntity<RawUser> getRawUser_ByEmail(@RequestParam("email") String parameter_email) {
            boolean check_one = rawUserService.check_available_email.test(parameter_email);
@@ -19,6 +20,15 @@ public class RawUserController_GET {
               return ResponseEntity.ok(target);
        }else {return ResponseEntity.notFound().build();}
     }
+
+    //GET using ID
+    @GetMapping("get-r-user/id/")
+    public ResponseEntity<RawUser> getRawUser_ByID(@RequestParam("id") Long parameter_id) {
+        RawUser temp = rawUserService.FindRawUserById(parameter_id);
+        if(temp != null){return ResponseEntity.ok(temp);}
+        else{return ResponseEntity.notFound().build();}
+    }
+
 
 
     @Autowired

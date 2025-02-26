@@ -32,10 +32,10 @@ public class DriverUser extends RawUser{
         this.instagram = " ";
     }
 
-    @Column/*(nullable = true)*/
+    @Lob
     private byte[] criminal_record;
 
-    @Column/*(nullable = true)*/
+    @Lob
     private byte[] cnh;
 
     @Column/*(nullable = true)*/

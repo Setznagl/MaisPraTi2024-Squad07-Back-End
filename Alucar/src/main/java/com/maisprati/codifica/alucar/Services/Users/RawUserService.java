@@ -3,12 +3,12 @@ package com.maisprati.codifica.alucar.Services.Users;
 import com.maisprati.codifica.alucar.Models.Users.RawUser;
 import com.maisprati.codifica.alucar.Repository.DB.Users.RawUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.function.Predicate;
 
-import static com.maisprati.codifica.alucar.Lambdas.lbd.*;
 import static com.maisprati.codifica.alucar.Repository.DB.Users.RawUserRepository.*;
 
 @Service
@@ -19,22 +19,29 @@ public class RawUserService {
     }RawUserRepository rawUserRepository;
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    @SuppressWarnings({"unchecked","rawtypes"})
-    public void InsertRawUser(RawUser parameter_rawuser){
-        insert_data.apply((JpaRepository)rawUserRepository , parameter_rawuser);
-    }
+    //CRUD - Create
+    public void InsertRawUser(RawUser parameter_rawuser){rawUserRepository.save(parameter_rawuser);}
 
-    @SuppressWarnings({"unchecked","rawtypes","unused"})
+    //CRUD - Read
     public RawUser FindRawUserById(Long parameter_id){
-        return (RawUser) find_data_by_id.apply((JpaRepository)rawUserRepository , parameter_id);
+        return (RawUser) get_user_by_id.apply(rawUserRepository , parameter_id);
     }
 
+    //CRUD - Read
     public RawUser FindRawUserByEmail(String parameter_email){
         return (RawUser) get_user_by_email.apply(rawUserRepository , parameter_email);
     }
 
-    @SuppressWarnings({"unchecked","rawtypes"})
-    public void DeleteRawUserById(Long parameter_id){delete_data_by_id.accept((JpaRepository) rawUserRepository , parameter_id);}
+    //CRUD - Delete
+    public void DeleteRawUserById(Long parameter_id) throws HttpClientErrorException{
+        RawUser temp = rawUserRepository.findRawUserByID(parameter_id);
+        if(temp != null){
+            try {rawUserRepository.delete(temp);}
+            catch (Exception e){throw new HttpClientErrorException(
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    e.getMessage());}
+        }else{throw new HttpClientErrorException(HttpStatus.NOT_FOUND);}
+    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

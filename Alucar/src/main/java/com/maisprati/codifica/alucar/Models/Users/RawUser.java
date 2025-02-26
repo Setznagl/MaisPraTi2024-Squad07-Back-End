@@ -55,7 +55,7 @@ public class RawUser {
     @Column(/*(nullable = true)*/ length = 50)
     private java.sql.Timestamp created_at;
 
-    @Column(/*(nullable = true)*/)
+    @Lob
     private byte[] photo;
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -70,6 +70,7 @@ public class RawUser {
     public void setEmail(String email){this.email = email;}
 
     public String getPassword(){return password;}
+    @SuppressWarnings({"unused"})
     public void setPassword(String password){this.password = password;}
 
     public String getCpf(){return cpf;}

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class DriverUserController_GET {
 
+    //GET using Email
     @GetMapping("get-d-user")
     public ResponseEntity<DriverUser> getDriverUser_ByEmail(@RequestParam("email") String parameter_email) {
             boolean check_one = driverUserService.check_available_email.test(parameter_email);
@@ -18,6 +19,14 @@ public class DriverUserController_GET {
         if (!check_one && check_two){DriverUser target = driverUserService.FindDriverUserByEmail(parameter_email);
                return ResponseEntity.ok(target);
         }else {return ResponseEntity.notFound().build();}
+    }
+
+    //GET using ID
+    @GetMapping("get-d-user/id/")
+    public ResponseEntity<DriverUser> getDriverUser_ByID(@RequestParam("id") Long parameter_id) {
+        DriverUser temp = driverUserService.FindDriverUserById(parameter_id);
+        if(temp != null){return ResponseEntity.ok(temp);}
+        else{return ResponseEntity.notFound().build();}
     }
 
 
