@@ -5,10 +5,10 @@ import com.maisprati.codifica.alucar.Util.Enum.Status;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 
 /* Attributes inherited from "Vehicle"
 /////////////////////////////////////
+   private Long owner_id
    private String brand;
    private String model;
    private java.sql.Date year;
@@ -35,7 +35,10 @@ public class Car extends Vehicle {
        String parameter_number_of_seats,
        Long daily_rent_value,
        String parameter_description,
-       ArrayList<byte[]> parameter_photos
+       byte[] parameter_photo01,
+       byte[] parameter_photo02,
+       byte[] parameter_photo03,
+       byte[] parameter_photo04
     )
     {
         super(parameter_owner_id , parameter_brand , parameter_model , parameter_year , parameter_license_plate);
@@ -53,30 +56,15 @@ public class Car extends Vehicle {
         /////////////////////////////////////////
         this.views_counter = 0L;
         this.status = Status.AVAILABLE;
-        this.photo01 = parameter_photos.get(0);
-        this.photo02 = parameter_photos.get(1);
-        this.photo03 = parameter_photos.get(2);
-        this.photo04 = parameter_photos.get(3);
+        this.photo01 = parameter_photo01;
+        this.photo02 = parameter_photo02;
+        this.photo03 = parameter_photo03;
+        this.photo04 = parameter_photo04;
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false)
-    private Long owner_id;
-
-    @Column(nullable = false)
-    private String brand;
-
-    @Column(nullable = false)
-    private String model;
-
-    @Column(nullable = false)
-    private java.sql.Date year;
-
-    @Column(nullable = false)
-    private String license_plate;
 
     @Column(nullable = false)
     private String title;
@@ -96,13 +84,13 @@ public class Car extends Vehicle {
     @Column()
     private String secondary_fuel;
 
-    @Column()
+    @Column(nullable = false)
     private String engine_power;
 
     @Column()
     private String steering_system;
 
-    @Column()
+    @Column(nullable = false)
     private String number_of_seats;
 
     @Column()
@@ -111,19 +99,19 @@ public class Car extends Vehicle {
     @Column()
     private Long views_counter;
 
-    @Column(nullable = false)
+    @Column()
     private java.sql.Timestamp created_at;
 
     @Column(nullable = false)
     private Status status;
 
-    @Column(nullable = false)
+    @Column()
     private String description;
 
-    @Column() private byte[] photo01;
-    @Column() private byte[] photo02;
-    @Column() private byte[] photo03;
-    @Column() private byte[] photo04;
+    @Lob private byte[] photo01;
+    @Lob private byte[] photo02;
+    @Lob private byte[] photo03;
+    @Lob private byte[] photo04;
 
     //////////////////////////////////////////
 
@@ -184,6 +172,5 @@ public class Car extends Vehicle {
     public byte[] getPhoto04() {return photo04;}
     public void setPhoto04(byte[] photo04) {this.photo04 = photo04;}
 
-    //////////////////////////////////////////
-
+    /////////////////////////////////////////////////////////////////////////////////
 }

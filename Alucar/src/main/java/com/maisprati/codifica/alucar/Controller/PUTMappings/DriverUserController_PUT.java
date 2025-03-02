@@ -15,17 +15,16 @@ public class DriverUserController_PUT {
     @PutMapping("account/update/driver")
     public ResponseEntity<Void> UpdateDriverUser(
             @RequestPart DriverUser user,
-            @RequestPart MultipartFile photo,
-            @RequestPart MultipartFile cnh,
-            @RequestPart MultipartFile criminal_record){
-        try {
-            user.setPhoto(photo.getBytes());
-            user.setCnh(cnh.getBytes());
-            user.setCriminal_record(criminal_record.getBytes());
-            try{driverUserService.UpdateDriverUser(user);}
-            catch (Exception e){ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());}
-            return ResponseEntity.status(HttpStatus.OK).build();
-        }catch (Exception e){return ResponseEntity.status(HttpStatus.UNSUPPORTED_MEDIA_TYPE).build();}
+            @RequestPart(required = false) MultipartFile photo,
+            @RequestPart(required = false) MultipartFile cnh,
+            @RequestPart(required = false) MultipartFile criminal_record){
+        try{
+            if(photo != null){user.setPhoto(photo.getBytes());}
+            if(cnh != null){user.setCnh(cnh.getBytes());}
+            if(criminal_record != null){user.setCriminal_record(criminal_record.getBytes());}
+                driverUserService.UpdateDriverUser(user);
+                return ResponseEntity.status(HttpStatus.OK).build();}
+        catch (Exception e){throw new IllegalArgumentException(e.getMessage());}
     }
 
 

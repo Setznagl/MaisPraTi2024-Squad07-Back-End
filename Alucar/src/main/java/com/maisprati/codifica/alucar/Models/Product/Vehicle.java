@@ -1,7 +1,11 @@
 package com.maisprati.codifica.alucar.Models.Product;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.MappedSuperclass;
+
 import java.sql.Date;
 
+@MappedSuperclass
 public abstract class Vehicle {
     protected Vehicle(){/*Empty constructor*/}
     public Vehicle
@@ -19,11 +23,19 @@ public abstract class Vehicle {
         this.year = parameterYear;
         this.license_plate = parameterLicensePlate;
     }
-
+    @Column(nullable = false)
     private Long owner_id;
+
+    @Column(nullable = false)
     private String brand;
+
+    @Column(nullable = false)
     private String model;
+
+    @Column(nullable = false)
     private java.sql.Date year;
+
+    @Column(nullable = false)
     private String license_plate;
 
     ////////////////////////////////////////////////////////////////////////////

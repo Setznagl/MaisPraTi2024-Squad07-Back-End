@@ -12,10 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class DriverUserController_DELETE {
 
     //CRUD - Delete
-    @DeleteMapping("delete-d-user/id/")
+    @DeleteMapping("/delete-d-user/id/")
     public ResponseEntity<String> deleteDriverUser(@RequestParam Long id) {
-        try {driverUserService.DeleteDriverUserById(id);}
-        catch (Exception e){return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());}
+        driverUserService.DeleteDriverUserById(id);
         return ResponseEntity.status(HttpStatus.OK).body("User deleted successfully!");
     }
 

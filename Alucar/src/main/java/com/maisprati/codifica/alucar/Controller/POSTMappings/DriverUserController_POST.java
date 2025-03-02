@@ -15,39 +15,20 @@ import org.springframework.web.bind.annotation.RestController;
 import static com.maisprati.codifica.alucar.Lambdas.GenericUserRepository.*;
 
 @RestController
-@RequestMapping("/account")
 public class DriverUserController_POST {
 
     //CRUD - Create
     @PostMapping
-    @RequestMapping("/create/driver")
+    @RequestMapping("/account/create/driver")
     public ResponseEntity<Void> createDriverUser(@RequestBody RawUser baseUser) {
         boolean check = driverUserService.check_available_email.test(baseUser.getEmail());
-        try {
-            if (check) {
-                DriverUser tempUser = conversion_raw_to_driver_user.apply(baseUser);
-                rawUserService.DeleteRawUserById(baseUser.getId());
-                driverUserService.InsertDriverUser(tempUser);
-                return ResponseEntity.status(HttpStatus.CREATED).build();
-            }else {
-                return ResponseEntity.status(HttpStatus.IM_USED).build();
-            }
-        }catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        if(check){
+            DriverUser tempUser = conversion_raw_to_driver_user.apply(baseUser);
+            rawUserService.DeleteRawUserById(baseUser.getId());
+            driverUserService.InsertDriverUser(tempUser);
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+       }else {return ResponseEntity.status(HttpStatus.IM_USED).build();}
     }
-
-    //CRUD - Delete
-    @PostMapping @RequestMapping("/delete/driver")
-    public ResponseEntity<Void> deleteDriverUser(@RequestBody DriverUser baseUser) {
-        try {
-            driverUserService.DeleteDriverUserById(baseUser.getId());
-            return ResponseEntity.status(HttpStatus.OK).build();
-        }catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
-
 
     @Autowired
     public DriverUserController_POST(DriverUserService driverUserService, RawUserService rawUserService) {

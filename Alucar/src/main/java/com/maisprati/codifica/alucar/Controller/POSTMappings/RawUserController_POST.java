@@ -11,20 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/account")
 public class RawUserController_POST {
 
     @PostMapping
-    @RequestMapping("/create")
+    @RequestMapping("/account/create")
     public ResponseEntity<Void> createRawUser(@RequestBody RawUser parameter_rawuser) {
         boolean check = rawUserService.check_available_email.test(parameter_rawuser.getEmail());
-            if (check) {
-                rawUserService.InsertRawUser(parameter_rawuser);
-                return ResponseEntity.status(HttpStatus.CREATED).build();
-            }
-            else {
-                return ResponseEntity.status(HttpStatus.IM_USED).build();
-            }
+        if(check){
+           rawUserService.InsertRawUser(parameter_rawuser);
+           return ResponseEntity.status(HttpStatus.CREATED).build();
+        }else{return ResponseEntity.status(HttpStatus.IM_USED).build();}
     }
 
 

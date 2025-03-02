@@ -17,14 +17,13 @@ public class RenterUserController_PUT {
     @PutMapping("account/update/renter")
     public ResponseEntity<Void> UpdateRenterUser(
             @RequestPart RenterUser user,
-            @RequestPart MultipartFile photo
+            @RequestPart(required = false) MultipartFile photo
     ){
         try{
-            user.setPhoto(photo.getBytes());
-            try{renterUserService.UpdateRenterUser(user);}
-            catch (Exception e){ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());}
-            return ResponseEntity.status(HttpStatus.OK).build();}
-        catch (Exception e){return ResponseEntity.status(HttpStatus.UNSUPPORTED_MEDIA_TYPE).build();}
+            if(photo != null){user.setPhoto(photo.getBytes());}
+                renterUserService.UpdateRenterUser(user);
+                return ResponseEntity.status(HttpStatus.OK).build();}
+        catch (Exception e){throw new IllegalArgumentException(e.getMessage());}
     }
 
     @Autowired

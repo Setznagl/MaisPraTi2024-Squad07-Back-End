@@ -15,12 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 import static com.maisprati.codifica.alucar.Lambdas.GenericUserRepository.*;
 
 @RestController
-@RequestMapping("/account")
 public class RenterUserController_POST {
 
     //CRUD - Create
     @PostMapping
-    @RequestMapping("/create/renter")
+    @RequestMapping("/account/create/renter")
     public ResponseEntity<Void> createRenterUser(@RequestBody RawUser baseUser) {
         boolean check = renterUserService.check_available_email.test(baseUser.getEmail());
         if (check) {
@@ -30,28 +29,6 @@ public class RenterUserController_POST {
             return ResponseEntity.status(HttpStatus.CREATED).build();
         }else {
             return ResponseEntity.status(HttpStatus.IM_USED).build();
-        }
-    }
-
-    //CRUD - Delete
-    @PostMapping @RequestMapping("/delete/renter")
-    public ResponseEntity<Void> deleteDriverUser(@RequestBody RenterUser baseUser) {
-        try {
-            renterUserService.DeleteRenterUserById(baseUser.getId());
-            return ResponseEntity.status(HttpStatus.OK).build();
-        }catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
-
-    //CRUD - Update Simple data according FIGMA
-    @PostMapping @RequestMapping("/update/renter")
-    public ResponseEntity<Void> updateDriverUser(@RequestBody RenterUser submittedUser) {
-        try {
-            renterUserService.UpdateRenterUser(submittedUser);
-            return ResponseEntity.status(HttpStatus.OK).build();
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 

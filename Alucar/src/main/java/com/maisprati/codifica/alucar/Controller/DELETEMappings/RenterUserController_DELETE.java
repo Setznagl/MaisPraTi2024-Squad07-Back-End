@@ -12,11 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class RenterUserController_DELETE {
 
     //CRUD - Delete
-    @DeleteMapping("delete-re-user/id/")
+    @DeleteMapping("/delete-re-user/id/")
     public ResponseEntity<String> deleteRenterUser(@RequestParam Long id) {
-        try {renterUserService.DeleteRenterUserById(id);}
-        catch(Exception e){return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());}
-        return ResponseEntity.status(HttpStatus.TOO_EARLY).build();
+        renterUserService.DeleteRenterUserById(id);
+        return ResponseEntity.status(HttpStatus.OK).body("User deleted successfully!");
     }
 
     @Autowired

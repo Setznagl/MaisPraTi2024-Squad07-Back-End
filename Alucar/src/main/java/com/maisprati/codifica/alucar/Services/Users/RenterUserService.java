@@ -1,16 +1,14 @@
 package com.maisprati.codifica.alucar.Services.Users;
 
+import com.maisprati.codifica.alucar.Exceptions.NotFoundDataException;
 import com.maisprati.codifica.alucar.Models.Users.RenterUser;
 import com.maisprati.codifica.alucar.Repository.DB.Users.RenterUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.function.Predicate;
 
-import static com.maisprati.codifica.alucar.Lambdas.lbd.*;
 import static com.maisprati.codifica.alucar.Lambdas.GenericUserRepository.*;
 
 @Service
@@ -22,15 +20,13 @@ public class RenterUserService {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //CRUD - Create
-    @SuppressWarnings({"unchecked","rawtypes"})
     public void InsertRenterUser(RenterUser renterUser) {
-        insert_data.apply((JpaRepository)renterUserRepository , renterUser);
+        renterUserRepository.save(renterUser);
     }
 
     //CRUD - Read
-    @SuppressWarnings({"unchecked","rawtypes","unused"})
     public RenterUser FindRenterUserById(Long parameter_id){
-        return (RenterUser) find_data_by_id.apply((JpaRepository)renterUserRepository , parameter_id);
+        return (RenterUser) get_user_by_id.apply(renterUserRepository , parameter_id);
     }
 
     //CRUD - Read
@@ -44,19 +40,14 @@ public class RenterUserService {
         RenterUser previousData = FindRenterUserById(submittedUser.getId());
         //Submit to lambda validate changes, null field new values will return previous actual data
         RenterUser treatedData = treat_renter_update.apply(previousData, submittedUser);
-        try {renterUserRepository.save(treatedData);}
-        catch (Exception e){System.out.println(e.getMessage());}
+        renterUserRepository.save(treatedData);
     }
 
     //CRUD - Delete
     public void DeleteRenterUserById(Long parameter_id) throws HttpClientErrorException {
         RenterUser temp = FindRenterUserById(parameter_id);
-        if(temp != null){
-            try{renterUserRepository.delete(temp);}
-            catch (Exception e){throw new HttpClientErrorException(
-                    HttpStatus.INTERNAL_SERVER_ERROR,
-                    e.getMessage());}
-        }else{throw new HttpClientErrorException(HttpStatus.NOT_FOUND);}
+        if(temp != null){renterUserRepository.delete(temp);
+        }else{throw new NotFoundDataException("Renter user with this id was not found");}
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

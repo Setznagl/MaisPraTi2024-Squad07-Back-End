@@ -1,11 +1,10 @@
 package com.maisprati.codifica.alucar.Services.Users;
 
+import com.maisprati.codifica.alucar.Exceptions.NotFoundDataException;
 import com.maisprati.codifica.alucar.Models.Users.RawUser;
 import com.maisprati.codifica.alucar.Repository.DB.Users.RawUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.function.Predicate;
 
@@ -20,7 +19,9 @@ public class RawUserService {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //CRUD - Create
-    public void InsertRawUser(RawUser parameter_rawuser){rawUserRepository.save(parameter_rawuser);}
+    public void InsertRawUser(RawUser parameter_rawuser){
+        rawUserRepository.save(parameter_rawuser);
+    }
 
     //CRUD - Read
     public RawUser FindRawUserById(Long parameter_id){
@@ -32,15 +33,13 @@ public class RawUserService {
         return (RawUser) get_user_by_email.apply(rawUserRepository , parameter_email);
     }
 
+
     //CRUD - Delete
-    public void DeleteRawUserById(Long parameter_id) throws HttpClientErrorException{
+    public void DeleteRawUserById(Long parameter_id){
         RawUser temp = rawUserRepository.findRawUserByID(parameter_id);
         if(temp != null){
-            try {rawUserRepository.delete(temp);}
-            catch (Exception e){throw new HttpClientErrorException(
-                    HttpStatus.INTERNAL_SERVER_ERROR,
-                    e.getMessage());}
-        }else{throw new HttpClientErrorException(HttpStatus.NOT_FOUND);}
+            rawUserRepository.delete(temp);
+        }else{throw new NotFoundDataException("The raw user with this id was not found");}
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

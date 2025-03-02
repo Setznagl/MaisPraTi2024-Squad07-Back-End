@@ -9,6 +9,7 @@ import com.maisprati.codifica.alucar.Repository.DB.Users.RenterUserRepository;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 public interface GenericUserRepository{
 
@@ -98,4 +99,7 @@ public interface GenericUserRepository{
         return treatedData;
     };
 
+    Supplier<RenterUser> equals_comparable_renter = () -> {
+        return new RenterUser(" "," "," ");
+    };
 }

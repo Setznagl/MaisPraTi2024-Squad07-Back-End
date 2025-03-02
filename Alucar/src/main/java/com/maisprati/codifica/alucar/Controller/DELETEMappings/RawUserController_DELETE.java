@@ -12,10 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class RawUserController_DELETE {
 
     //CRUD - Delete
-    @DeleteMapping("delete-r-user/id/")
+    @DeleteMapping("/delete-r-user/id/")
     public ResponseEntity<String> DeleteRawUser(@RequestParam Long id) {
-        try{rawUserService.DeleteRawUserById(id);}
-        catch (Exception e){return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());}
+        rawUserService.DeleteRawUserById(id);
         return ResponseEntity.status(HttpStatus.OK).body("User deleted successfully!");
     }
 
