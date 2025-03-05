@@ -13,8 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 public class CarController_PUT {
 
-    @PutMapping("account/update/car")
-    public ResponseEntity<Void> updateCar(
+    @PutMapping("/account/update/car")
+    public ResponseEntity<Car> updateCar(
             @RequestPart Car car,
             @RequestPart(required = false) MultipartFile photo_01,
             @RequestPart(required = false) MultipartFile photo_02,
@@ -27,9 +27,11 @@ public class CarController_PUT {
             if(photo_04 != null){car.setPhoto01(photo_04.getBytes());}
                 carService.UpdateCar(car);
                 return ResponseEntity.status(HttpStatus.OK).build();
-        }catch (Exception e){throw new IllegalArgumentException(e.getMessage());}
-    }
 
+        }catch (Exception e){
+            throw new IllegalArgumentException(e.getMessage());
+        }
+    }
 
     @Autowired
     CarController_PUT(CarService carService){

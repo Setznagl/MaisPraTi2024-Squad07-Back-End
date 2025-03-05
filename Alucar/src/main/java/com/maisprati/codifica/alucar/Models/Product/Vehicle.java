@@ -23,19 +23,19 @@ public abstract class Vehicle {
         this.year = parameterYear;
         this.license_plate = parameterLicensePlate;
     }
-    @Column(nullable = false)
+    @Column()
     private Long owner_id;
 
-    @Column(nullable = false)
+    @Column()
     private String brand;
 
-    @Column(nullable = false)
+    @Column()
     private String model;
 
-    @Column(nullable = false)
+    @Column()
     private java.sql.Date year;
 
-    @Column(nullable = false)
+    @Column()
     private String license_plate;
 
     ////////////////////////////////////////////////////////////////////////////

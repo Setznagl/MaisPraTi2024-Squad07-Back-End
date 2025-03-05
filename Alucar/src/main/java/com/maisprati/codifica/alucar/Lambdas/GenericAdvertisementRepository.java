@@ -8,11 +8,14 @@ import java.util.function.BiFunction;
 
 public interface GenericAdvertisementRepository {
 
-    BiFunction<Car, Car, Car> treat_car_update = (previousData, submittedChanges) -> {
-        Car treatedData = new Car(0L, "", "", Date.valueOf("0000"),
-                "","", "", "","","",
-                "","","","", 0L,
-                "", new byte[]{}, new byte[]{}, new byte[]{}, new byte[]{});
+    BiFunction<Car, Car, Car> treat_car_update = (previousData , submittedChanges) -> {
+        Car treatedData = new Car(
+                0L,
+                " ",
+                " ",
+                Date.valueOf("2000-2-2"),
+                " "
+        );
         treatedData.setId(previousData.getId());
         if(submittedChanges.getOwner_id() == null){treatedData.setOwner_id(previousData.getOwner_id());}
             else{treatedData.setOwner_id(submittedChanges.getOwner_id());}

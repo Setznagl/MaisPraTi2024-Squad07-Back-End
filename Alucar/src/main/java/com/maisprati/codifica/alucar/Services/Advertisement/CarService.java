@@ -31,6 +31,11 @@ public class CarService {
     }
 
     //CRUD - Read
+    public Car FindCarByLicensePlate(String parameter_license_plate){
+        return carRepository.Repository_Find_By_License_Plate(parameter_license_plate);
+    }
+
+    //CRUD - Read
     public List<Car> FindAllCarsByRenterID(Long renter_id) {
         return carRepository.Repository_FindAll_by_renterID(renter_id);
     }
@@ -42,10 +47,12 @@ public class CarService {
 
     //CRUD - Update
     public void UpdateCar(Car submitted_car){
-        //Besides the ID is the same the submitted data probably will change
-        Car previousData = FindCarById(submitted_car.getId());
+            System.out.println("submitted_car\n" + submitted_car);
+        Car previousData = FindCarByLicensePlate(submitted_car.getLicense_plate());
+            System.out.println("previoudata\n" + previousData);
         //Submit to lambda validate changes, null field new values will return previous actual data
-        Car treatedData = treat_car_update.apply(previousData, submitted_car);
+        Car treatedData = treat_car_update.apply(previousData , submitted_car);
+            System.out.println("treateddata\n" + treatedData);
         carRepository.save(treatedData);
     }
 

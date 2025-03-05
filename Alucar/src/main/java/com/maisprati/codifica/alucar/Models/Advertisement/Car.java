@@ -5,6 +5,8 @@ import com.maisprati.codifica.alucar.Util.Enum.Status;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.Arrays;
 
 /* Attributes inherited from "Vehicle"
 /////////////////////////////////////
@@ -17,59 +19,43 @@ import java.sql.Timestamp;
 @Entity
 public class Car extends Vehicle {
     protected Car(/*Empty constructor*/){}
-    public Car
-    (
-       Long parameter_owner_id,
-       String parameter_brand,
-       String parameter_model ,
-       java.sql.Date parameter_year,
-       String parameter_license_plate,
-       String parameter_title,
-       String parameter_location,
-       String parameter_transmission,
-       String parameter_mileage,
-       String parameter_main_fuel,
-       String parameter_secondary_fuel,
-       String parameter_engine_Power,
-       String parameter_steering_system,
-       String parameter_number_of_seats,
-       Long daily_rent_value,
-       String parameter_description,
-       byte[] parameter_photo01,
-       byte[] parameter_photo02,
-       byte[] parameter_photo03,
-       byte[] parameter_photo04
-    )
-    {
-        super(parameter_owner_id , parameter_brand , parameter_model , parameter_year , parameter_license_plate);
-        this.title = parameter_title;
-        this.location = parameter_location;
-        this.transmission = parameter_transmission;
-        this.mileage = parameter_mileage;
-        this.main_fuel = parameter_main_fuel;
-        this.secondary_fuel = parameter_secondary_fuel;
-        this.engine_power = parameter_engine_Power;
-        this.steering_system = parameter_steering_system;
-        this.number_of_seats = parameter_number_of_seats;
-        this.daily_rent_value = daily_rent_value;
-        this.description = parameter_description;
+    public Car (
+            Long parameter_owner_id,
+            String parameter_brand,
+            String parameter_model ,
+            java.sql.Date parameter_year,
+            String parameter_license_plate
+    ){
+        super(parameter_owner_id, parameter_brand, parameter_model, parameter_year, parameter_license_plate);
+        this.title = " ";
+        this.location = " ";
+        this.transmission = " ";
+        this.mileage = " ";
+        this.main_fuel = " ";
+        this.secondary_fuel = " ";
+        this.engine_power = " ";
+        this.steering_system = " ";
+        this.number_of_seats = " ";
+        this.daily_rent_value = 0L;
+        this.created_at = Timestamp.valueOf(LocalDateTime.now());
+        this.description = " ";
         /////////////////////////////////////////
         this.views_counter = 0L;
         this.status = Status.AVAILABLE;
-        this.photo01 = parameter_photo01;
-        this.photo02 = parameter_photo02;
-        this.photo03 = parameter_photo03;
-        this.photo04 = parameter_photo04;
+        this.photo01 = " ".getBytes();
+        this.photo02 = " ".getBytes();
+        this.photo03 = " ".getBytes();
+        this.photo04 = " ".getBytes();
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column()
     private String title;
 
-    @Column(nullable = false)
+    @Column()
     private String location;
 
     @Column()
@@ -84,13 +70,13 @@ public class Car extends Vehicle {
     @Column()
     private String secondary_fuel;
 
-    @Column(nullable = false)
+    @Column()
     private String engine_power;
 
     @Column()
     private String steering_system;
 
-    @Column(nullable = false)
+    @Column()
     private String number_of_seats;
 
     @Column()
@@ -102,7 +88,7 @@ public class Car extends Vehicle {
     @Column()
     private java.sql.Timestamp created_at;
 
-    @Column(nullable = false)
+    @Column()
     private Status status;
 
     @Column()
@@ -151,9 +137,6 @@ public class Car extends Vehicle {
     public Long getViews_counter() {return views_counter;}
     public void setViews_counter(Long views_counter) {this.views_counter = views_counter;}
 
-    public Timestamp getCreated_at() {return created_at;}
-    public void setCreated_at(Timestamp created_at) {this.created_at = created_at;}
-
     public Status getStatus() {return status;}
     public void setStatus(Status status) {this.status = status;}
 
@@ -171,6 +154,37 @@ public class Car extends Vehicle {
 
     public byte[] getPhoto04() {return photo04;}
     public void setPhoto04(byte[] photo04) {this.photo04 = photo04;}
+
+    @Override
+    public String toString() {
+        return "\n\nCar{" +"\n" +
+                "id=" + id +"\n" +
+                "owner_id" + this.getOwner_id() +"\n" +
+                "brand" + this.getBrand() +"\n" +
+                "model " + this.getModel() +"\n" +
+                "year" + this.getYear() +"\n" +
+                "license_plate" + this.getLicense_plate() +"\n" +
+                "title='" + title +"\n" +
+                "location='" + location +"\n" +
+                "transmission='" + transmission +"\n" +
+                "mileage='" + mileage +"\n" +
+                "main_fuel='" + main_fuel +"\n" +
+                "secondary_fuel='" + secondary_fuel +"\n" +
+                "engine_power='" + engine_power +"\n" +
+                "steering_system='" + steering_system +"\n" +
+                "number_of_seats='" + number_of_seats +"\n" +
+                "daily_rent_value=" + daily_rent_value +"\n" +
+                "views_counter=" + views_counter +"\n" +
+                "created_at=" + created_at +"\n" +
+                "status=" + status +"\n" +
+                "description='" + description +"\n" +
+                "photo01=" + Arrays.toString(photo01) +"\n" +
+                "photo02=" + Arrays.toString(photo02) +"\n" +
+                "photo03=" + Arrays.toString(photo03) +"\n" +
+                "photo04=" + Arrays.toString(photo04) +"\n" +
+                "\n\n"+
+                '}';
+    }
 
     /////////////////////////////////////////////////////////////////////////////////
 }

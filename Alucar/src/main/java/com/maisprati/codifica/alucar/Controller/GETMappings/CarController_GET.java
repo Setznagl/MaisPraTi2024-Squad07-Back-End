@@ -29,7 +29,9 @@ public class CarController_GET {
             EntityModel<Car> carEntityModel = EntityModel.of(temp,
                     linkTo(methodOn(CarController_GET.class).getCarByID(id)).withSelfRel(),
                     linkTo(methodOn(CarController_GET.class).getCarsFromRenter(temp.getOwner_id())).withRel("AllCarsFromRenter")
-            );return ResponseEntity.status(HttpStatus.OK).body(carEntityModel);
+            );
+            temp.setViews_counter(temp.getViews_counter() + 1);
+            return ResponseEntity.status(HttpStatus.OK).body(carEntityModel);
         }else{throw new NotFoundDataException("Car not found");}
     }
 
