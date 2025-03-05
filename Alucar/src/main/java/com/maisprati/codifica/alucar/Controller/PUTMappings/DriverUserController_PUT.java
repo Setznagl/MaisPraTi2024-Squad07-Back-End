@@ -1,6 +1,6 @@
 package com.maisprati.codifica.alucar.Controller.PUTMappings;
 
-import com.maisprati.codifica.alucar.Models.Users.DriverUser;
+import com.maisprati.codifica.alucar.Models.UserTypes.DriverUser;
 import com.maisprati.codifica.alucar.Services.Users.DriverUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

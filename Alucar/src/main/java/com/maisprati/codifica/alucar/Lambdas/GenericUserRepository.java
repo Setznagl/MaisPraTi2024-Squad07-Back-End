@@ -1,8 +1,8 @@
 package com.maisprati.codifica.alucar.Lambdas;
 
-import com.maisprati.codifica.alucar.Models.Users.DriverUser;
-import com.maisprati.codifica.alucar.Models.Users.RawUser;
-import com.maisprati.codifica.alucar.Models.Users.RenterUser;
+import com.maisprati.codifica.alucar.Models.UserTypes.DriverUser;
+import com.maisprati.codifica.alucar.Models.UserTypes.RawUser;
+import com.maisprati.codifica.alucar.Models.UserTypes.RenterUser;
 import com.maisprati.codifica.alucar.Repository.DB.Users.DriverUserRepository;
 import com.maisprati.codifica.alucar.Repository.DB.Users.RawUserRepository;
 import com.maisprati.codifica.alucar.Repository.DB.Users.RenterUserRepository;

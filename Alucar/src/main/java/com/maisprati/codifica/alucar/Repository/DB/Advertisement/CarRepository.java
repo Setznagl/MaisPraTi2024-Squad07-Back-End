@@ -1,7 +1,7 @@
 package com.maisprati.codifica.alucar.Repository.DB.Advertisement;
 
 import com.maisprati.codifica.alucar.Lambdas.GenericAdvertisementRepository;
-import com.maisprati.codifica.alucar.Models.Advertisement.Car;
+import com.maisprati.codifica.alucar.Models.Products.Car;
 import com.maisprati.codifica.alucar.Util.Enum.Status;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

@@ -1,4 +1,4 @@
-package com.maisprati.codifica.alucar.Models.Product;
+package com.maisprati.codifica.alucar.Models.Products;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;

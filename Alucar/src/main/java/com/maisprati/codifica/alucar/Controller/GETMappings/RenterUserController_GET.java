@@ -1,6 +1,6 @@
 package com.maisprati.codifica.alucar.Controller.GETMappings;
 
-import com.maisprati.codifica.alucar.Models.Users.RenterUser;
+import com.maisprati.codifica.alucar.Models.UserTypes.RenterUser;
 import com.maisprati.codifica.alucar.Services.Users.RenterUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

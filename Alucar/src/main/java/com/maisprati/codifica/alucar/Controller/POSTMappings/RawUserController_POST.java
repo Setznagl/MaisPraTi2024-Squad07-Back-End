@@ -1,6 +1,6 @@
 package com.maisprati.codifica.alucar.Controller.POSTMappings;
 
-import com.maisprati.codifica.alucar.Models.Users.RawUser;
+import com.maisprati.codifica.alucar.Models.UserTypes.RawUser;
 import com.maisprati.codifica.alucar.Services.Users.RawUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

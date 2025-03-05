@@ -1,7 +1,7 @@
 package com.maisprati.codifica.alucar.Services.Users;
 
 import com.maisprati.codifica.alucar.Exceptions.NotFoundDataException;
-import com.maisprati.codifica.alucar.Models.Users.RawUser;
+import com.maisprati.codifica.alucar.Models.UserTypes.RawUser;
 import com.maisprati.codifica.alucar.Repository.DB.Users.RawUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

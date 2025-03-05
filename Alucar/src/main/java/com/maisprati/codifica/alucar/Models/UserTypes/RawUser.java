@@ -1,4 +1,4 @@
-package com.maisprati.codifica.alucar.Models.Users;
+package com.maisprati.codifica.alucar.Models.UserTypes;
 
 import jakarta.persistence.*;
 

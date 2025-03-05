@@ -1,6 +1,6 @@
 package com.maisprati.codifica.alucar.Services.Advertisement;
 
-import com.maisprati.codifica.alucar.Models.Advertisement.Car;
+import com.maisprati.codifica.alucar.Models.Products.Car;
 import com.maisprati.codifica.alucar.Repository.DB.Advertisement.CarRepository;
 import com.maisprati.codifica.alucar.Util.Enum.Status;
 import org.springframework.beans.factory.annotation.Autowired;

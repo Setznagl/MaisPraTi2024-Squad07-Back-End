@@ -1,7 +1,7 @@
 package com.maisprati.codifica.alucar.Controller.GETMappings;
 
 import com.maisprati.codifica.alucar.Exceptions.NotFoundDataException;
-import com.maisprati.codifica.alucar.Models.Users.RawUser;
+import com.maisprati.codifica.alucar.Models.UserTypes.RawUser;
 import com.maisprati.codifica.alucar.Services.Users.RawUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

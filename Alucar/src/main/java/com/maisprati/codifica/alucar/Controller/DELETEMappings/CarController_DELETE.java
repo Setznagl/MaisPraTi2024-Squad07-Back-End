@@ -1,7 +1,7 @@
 package com.maisprati.codifica.alucar.Controller.DELETEMappings;
 
 import com.maisprati.codifica.alucar.Exceptions.NotFoundDataException;
-import com.maisprati.codifica.alucar.Models.Advertisement.Car;
+import com.maisprati.codifica.alucar.Models.Products.Car;
 import com.maisprati.codifica.alucar.Services.Advertisement.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

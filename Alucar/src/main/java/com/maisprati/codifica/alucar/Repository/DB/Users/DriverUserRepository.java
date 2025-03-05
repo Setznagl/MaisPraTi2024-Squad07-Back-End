@@ -1,7 +1,7 @@
 package com.maisprati.codifica.alucar.Repository.DB.Users;
 
 import com.maisprati.codifica.alucar.Lambdas.GenericUserRepository;
-import com.maisprati.codifica.alucar.Models.Users.DriverUser;
+import com.maisprati.codifica.alucar.Models.UserTypes.DriverUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

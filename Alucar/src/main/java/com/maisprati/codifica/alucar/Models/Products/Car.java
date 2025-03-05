@@ -1,6 +1,5 @@
-package com.maisprati.codifica.alucar.Models.Advertisement;
+package com.maisprati.codifica.alucar.Models.Products;
 
-import com.maisprati.codifica.alucar.Models.Product.Vehicle;
 import com.maisprati.codifica.alucar.Util.Enum.Status;
 import jakarta.persistence.*;
 
@@ -36,7 +35,7 @@ public class Car extends Vehicle {
         this.engine_power = " ";
         this.steering_system = " ";
         this.number_of_seats = " ";
-        this.daily_rent_value = 0L;
+        this.daily_rent_value = 0D;
         this.created_at = Timestamp.valueOf(LocalDateTime.now());
         this.description = " ";
         /////////////////////////////////////////
@@ -80,7 +79,7 @@ public class Car extends Vehicle {
     private String number_of_seats;
 
     @Column()
-    private Long daily_rent_value;
+    private Double daily_rent_value;
 
     @Column()
     private Long views_counter;
@@ -131,8 +130,8 @@ public class Car extends Vehicle {
     public String getNumber_of_seats() {return number_of_seats;}
     public void setNumber_of_seats(String number_of_seats) {this.number_of_seats = number_of_seats;}
 
-    public Long getDaily_rent_value() {return daily_rent_value;}
-    public void setDaily_rent_value(Long daily_rent_value) {this.daily_rent_value = daily_rent_value;}
+    public Double getDaily_rent_value() {return daily_rent_value;}
+    public void setDaily_rent_value(Double daily_rent_value) {this.daily_rent_value = daily_rent_value;}
 
     public Long getViews_counter() {return views_counter;}
     public void setViews_counter(Long views_counter) {this.views_counter = views_counter;}

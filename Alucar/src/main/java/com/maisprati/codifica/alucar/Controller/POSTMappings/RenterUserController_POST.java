@@ -1,7 +1,7 @@
 package com.maisprati.codifica.alucar.Controller.POSTMappings;
 
-import com.maisprati.codifica.alucar.Models.Users.RawUser;
-import com.maisprati.codifica.alucar.Models.Users.RenterUser;
+import com.maisprati.codifica.alucar.Models.UserTypes.RawUser;
+import com.maisprati.codifica.alucar.Models.UserTypes.RenterUser;
 import com.maisprati.codifica.alucar.Services.Users.RawUserService;
 import com.maisprati.codifica.alucar.Services.Users.RenterUserService;
 import org.springframework.beans.factory.annotation.Autowired;

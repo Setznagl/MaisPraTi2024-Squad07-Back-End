@@ -1,6 +1,6 @@
 package com.maisprati.codifica.alucar.Lambdas;
 
-import com.maisprati.codifica.alucar.Models.Advertisement.Car;
+import com.maisprati.codifica.alucar.Models.Products.Car;
 import com.maisprati.codifica.alucar.Repository.DB.Advertisement.CarRepository;
 
 import java.sql.Date;

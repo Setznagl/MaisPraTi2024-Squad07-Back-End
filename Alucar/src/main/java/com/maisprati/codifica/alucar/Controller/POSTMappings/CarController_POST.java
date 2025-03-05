@@ -1,6 +1,6 @@
 package com.maisprati.codifica.alucar.Controller.POSTMappings;
 
-import com.maisprati.codifica.alucar.Models.Advertisement.Car;
+import com.maisprati.codifica.alucar.Models.Products.Car;
 import com.maisprati.codifica.alucar.Services.Advertisement.CarService;
 import com.maisprati.codifica.alucar.Services.Users.RenterUserService;
 import org.springframework.beans.factory.annotation.Autowired;

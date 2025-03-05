@@ -1,7 +1,7 @@
 package com.maisprati.codifica.alucar.Services.Users;
 
 import com.maisprati.codifica.alucar.Exceptions.NotFoundDataException;
-import com.maisprati.codifica.alucar.Models.Users.RenterUser;
+import com.maisprati.codifica.alucar.Models.UserTypes.RenterUser;
 import com.maisprati.codifica.alucar.Repository.DB.Users.RenterUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
