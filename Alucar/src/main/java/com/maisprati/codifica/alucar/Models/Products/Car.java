@@ -1,6 +1,6 @@
 package com.maisprati.codifica.alucar.Models.Products;
 
-import com.maisprati.codifica.alucar.Util.Enum.Status;
+import com.maisprati.codifica.alucar.Util.Enum.PRODUCT_STATUS;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
@@ -40,7 +40,7 @@ public class Car extends Vehicle {
         this.description = " ";
         /////////////////////////////////////////
         this.views_counter = 0L;
-        this.status = Status.AVAILABLE;
+        this.status = PRODUCT_STATUS.AVAILABLE;
         this.photo01 = " ".getBytes();
         this.photo02 = " ".getBytes();
         this.photo03 = " ".getBytes();
@@ -88,7 +88,7 @@ public class Car extends Vehicle {
     private java.sql.Timestamp created_at;
 
     @Column()
-    private Status status;
+    private PRODUCT_STATUS status;
 
     @Column()
     private String description;
@@ -136,8 +136,8 @@ public class Car extends Vehicle {
     public Long getViews_counter() {return views_counter;}
     public void setViews_counter(Long views_counter) {this.views_counter = views_counter;}
 
-    public Status getStatus() {return status;}
-    public void setStatus(Status status) {this.status = status;}
+    public PRODUCT_STATUS getStatus() {return status;}
+    public void setStatus(PRODUCT_STATUS PRODUCTSTATUS) {this.status = PRODUCTSTATUS;}
 
     public String getDescription() {return description;}
     public void setDescription(String description) {this.description = description;}

@@ -7,13 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.Optional;
 import java.util.function.*;
 
-/**
- * Versão extensa:
- * <p>
- * (Recebe um repositório JPA genérico identificado por Long (Id) e um objeto genérico para inserir via método .save()
- *  public static BiFunction<JpaRepository<Object, Long>, Object, Object>
- *         insert_data = (jparepository, generic_parameter) -> jparepository.save(generic_parameter);
- */
 public class lbd {
 
     public static BiFunction<JpaRepository<Object,Long>, Object, Object> insert_data = CrudRepository::save;

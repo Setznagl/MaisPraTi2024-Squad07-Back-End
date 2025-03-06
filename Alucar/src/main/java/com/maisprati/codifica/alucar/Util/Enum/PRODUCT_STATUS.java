@@ -1,6 +1,7 @@
 package com.maisprati.codifica.alucar.Util.Enum;
 
-public enum Status {
+public enum PRODUCT_STATUS {
     AVAILABLE,
-    UNAVAILABLE
+    UNAVAILABLE,
+    PENDING_APPROVAL
 }

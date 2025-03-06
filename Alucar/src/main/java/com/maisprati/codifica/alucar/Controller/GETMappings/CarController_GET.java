@@ -3,7 +3,7 @@ package com.maisprati.codifica.alucar.Controller.GETMappings;
 import com.maisprati.codifica.alucar.Exceptions.NotFoundDataException;
 import com.maisprati.codifica.alucar.Models.Products.Car;
 import com.maisprati.codifica.alucar.Services.Advertisement.CarService;
-import com.maisprati.codifica.alucar.Util.Enum.Status;
+import com.maisprati.codifica.alucar.Util.Enum.PRODUCT_STATUS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -52,7 +52,7 @@ public class CarController_GET {
 
     @GetMapping("/get-available-cars-from-renter/id")
     public ResponseEntity<CollectionModel<EntityModel<Car>>> getAvailableCarsFromRenter(@RequestParam Long renterID) {
-        List<Car> temp = carService.FindAllAvailableCarsByRenterID(renterID, Status.AVAILABLE);
+        List<Car> temp = carService.FindAllAvailableCarsByRenterID(renterID, PRODUCT_STATUS.AVAILABLE);
         if(temp != null){
             List<EntityModel<Car>> carEntityModels = temp.stream()
                     .map(car -> EntityModel.of(car,

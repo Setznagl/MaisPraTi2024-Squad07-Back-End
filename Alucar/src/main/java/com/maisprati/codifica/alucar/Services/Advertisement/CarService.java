@@ -2,7 +2,7 @@ package com.maisprati.codifica.alucar.Services.Advertisement;
 
 import com.maisprati.codifica.alucar.Models.Products.Car;
 import com.maisprati.codifica.alucar.Repository.DB.Advertisement.CarRepository;
-import com.maisprati.codifica.alucar.Util.Enum.Status;
+import com.maisprati.codifica.alucar.Util.Enum.PRODUCT_STATUS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,8 +41,8 @@ public class CarService {
     }
 
     //CRUD - Read
-    public List<Car> FindAllAvailableCarsByRenterID(Long renter_id, Status expected_status) {
-        return carRepository.Repository_FindAll_Available_by_renterID(renter_id , expected_status);
+    public List<Car> FindAllAvailableCarsByRenterID(Long renter_id, PRODUCT_STATUS expected_PRODUCTSTATUS) {
+        return carRepository.Repository_FindAll_Available_by_renterID(renter_id , expected_PRODUCTSTATUS);
     }
 
     //CRUD - Update
