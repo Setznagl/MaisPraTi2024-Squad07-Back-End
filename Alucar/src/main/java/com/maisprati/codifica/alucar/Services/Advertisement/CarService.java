@@ -47,12 +47,9 @@ public class CarService {
 
     //CRUD - Update
     public void UpdateCar(Car submitted_car){
-            System.out.println("submitted_car\n" + submitted_car);
         Car previousData = FindCarByLicensePlate(submitted_car.getLicense_plate());
-            System.out.println("previoudata\n" + previousData);
         //Submit to lambda validate changes, null field new values will return previous actual data
         Car treatedData = treat_car_update.apply(previousData , submitted_car);
-            System.out.println("treateddata\n" + treatedData);
         carRepository.save(treatedData);
     }
 

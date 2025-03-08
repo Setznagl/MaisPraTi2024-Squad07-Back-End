@@ -65,4 +65,5 @@ public interface GenericAdvertisementRepository {
             return conversion.Repository_findCarByID(parameter_id);
         }else return null;
     };
+
 }

@@ -1,16 +1,17 @@
 package com.maisprati.codifica.alucar.Services.Rent;
 
-import com.maisprati.codifica.alucar.Exceptions.DataPersistenceException;
-import com.maisprati.codifica.alucar.Exceptions.NotFoundDataException;
+import com.maisprati.codifica.alucar.Models.Products.Car;
 import com.maisprati.codifica.alucar.Models.RentModels.CarRent;
+import com.maisprati.codifica.alucar.Repository.DB.Advertisement.CarRepository;
 import com.maisprati.codifica.alucar.Repository.DB.Rent.CarRentRepository;
-import com.maisprati.codifica.alucar.Services.Advertisement.CarService;
 import com.maisprati.codifica.alucar.Util.Enum.PRODUCT_STATUS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
+
+import static com.maisprati.codifica.alucar.Repository.DB.Rent.CarRentRepository.rentRoleDriver;
+import static com.maisprati.codifica.alucar.Repository.DB.Rent.CarRentRepository.rentRoleRenter;
 
 @Service
 public class CarRentService {
@@ -27,24 +28,32 @@ public class CarRentService {
 
     //CRUD - Read
     public List<CarRent> Find_All_Related_CarRent_By_Any_UserID(Long parameter_id){
-        return carRentRepository.RepositoryFind_All_Related_CarRent_By_Any_UserID(parameter_id);
+        List<CarRent> temp = carRentRepository.RepositoryFind_All_Related_CarRent_By_Any_UserID(parameter_id);
+        List<CarRent> RenterRelated = temp.stream().filter(n -> rentRoleRenter.test(n , parameter_id)).toList();
+        List<CarRent> DriverRelated = temp.stream().filter(n -> rentRoleDriver.test(n , parameter_id)).toList();
+        boolean check_renter = !RenterRelated.isEmpty();
+        boolean check_driver = !DriverRelated.isEmpty();
+        if(check_renter){return RenterRelated;}
+        else if(check_driver){return DriverRelated;}
+        else return null;
+    }
+
+    //CRUD - Update
+    public void ApproveCarRent(CarRent parameter_rent, Car parameter_car){
+        parameter_car.setStatus(PRODUCT_STATUS.RENTED);
+        carRentRepository.save(parameter_rent);
+        carRepository.save(parameter_car);
     }
 
     //CRUD - Delete ( Future implemented by Spring Batch )
     public void Delete_CarRent_ById(Long parameter_rent_id){
-        CarRent parameter_rent = Find_CarRent_ById(parameter_rent_id);
-        PRODUCT_STATUS temp_PRODUCTSTATUS = carService.FindCarById(parameter_rent.getAdvertisement_id()).getStatus();
-        LocalDate today = LocalDate.now();
-        boolean check = temp_PRODUCTSTATUS != null && temp_PRODUCTSTATUS != PRODUCT_STATUS.UNAVAILABLE;
-        boolean check_two = today.isAfter(parameter_rent.getEnd_date().toLocalDate());
-        if(check && check_two){carRentRepository.delete(carRentRepository.RepositoryFindCarRentByID(parameter_rent_id));
-        }else{throw new DataPersistenceException("This rent doesn't exist anymore or you're trying to delete an active rent!");}
+        carRentRepository.deleteById(parameter_rent_id);
     }
 
 
     @Autowired
-    CarRentService(CarRentRepository carRentRepository, CarService carService){
+    CarRentService(CarRentRepository carRentRepository, CarRepository carRepository){
         this.carRentRepository = carRentRepository;
-        this.carService = carService;
-    }private final CarRentRepository carRentRepository;private final CarService carService;
+        this.carRepository = carRepository;
+    }private final CarRentRepository carRentRepository;private final CarRepository carRepository;
 }

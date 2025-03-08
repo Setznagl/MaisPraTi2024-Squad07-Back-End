@@ -17,7 +17,7 @@ import static com.maisprati.codifica.alucar.Lambdas.GenericUserRepository.equals
 public class CarController_POST {
 
     @PostMapping("/advertisement/create/car")
-    public ResponseEntity<Car> insertCar(
+    public ResponseEntity<Void> insertCar(
             @RequestPart Car submitted_car,
             @RequestPart(required = false) MultipartFile photo_01,
             @RequestPart(required = false) MultipartFile photo_02,

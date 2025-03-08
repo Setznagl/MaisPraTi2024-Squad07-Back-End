@@ -47,7 +47,7 @@ public class CarController_GET {
 
             return ResponseEntity.ok(CollectionModel.of(carEntityModels,
                    linkTo(methodOn(CarController_GET.class).getCarsFromRenter(renterID)).withSelfRel()));
-        }else {throw new NotFoundDataException("No one car was found for this user");}
+        }else throw new NotFoundDataException("No one car was found for this user");
     }
 
     @GetMapping("/get-available-cars-from-renter/id")
