@@ -1,5 +1,7 @@
 package com.maisprati.codifica.alucar.Models.UserTypes;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.*;
 
 import java.sql.Date;
@@ -25,6 +27,7 @@ public class RawUser {
     }
 
     @Id
+    @JsonProperty("id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     /**
@@ -32,30 +35,39 @@ public class RawUser {
      * no que seria a consulta dos documentos via API que no nosso projeto será feita via JSON/Mock
      */
     @Column(nullable = false , length = 50)
+    @JsonProperty("name")
     private String name;
 
     @Column(nullable = false , length = 50)
+    @JsonProperty("email")
     private String email;
 
     @Column(nullable = false)
+    @JsonProperty("password")
     private String password;
 
     @Column(/*(nullable = true)*/ length = 11 , unique = true )
+    @JsonProperty("cpf")
     private String cpf;
 
     @Column(/*(nullable = true)*/)
+    @JsonProperty("birthdate")
     private java.sql.Date birthdate;
 
     @Column(/*(nullable = true)*/ length = 15)
+    @JsonProperty("phone")
     private String phone;
 
     @Column(/*(nullable = true)*/ length = 2)
+    @JsonProperty("average_rating")
     private Integer average_rating;
 
     @Column(/*(nullable = true)*/ length = 50)
+    @JsonProperty("created_at")
     private java.sql.Timestamp created_at;
 
     @Lob
+    @JsonProperty("photo")
     private byte[] photo;
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
