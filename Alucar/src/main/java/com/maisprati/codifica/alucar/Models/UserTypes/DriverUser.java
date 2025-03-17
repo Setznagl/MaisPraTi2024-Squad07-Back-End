@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.sql.Date;
 
 @Entity
+@DiscriminatorValue("driver")
 public class DriverUser extends RawUser{
     protected DriverUser(){/*Empty constructor*/}
     /**
@@ -22,14 +23,13 @@ public class DriverUser extends RawUser{
     public DriverUser(String parameter_name , String parameter_email , String parameter_password) {
         super(parameter_name , parameter_email , parameter_password);
         /*
-         * Dados provisórios para previnir NullPointerException
+         * Prevent NullPointerException
          */
         this.criminal_record = " ".getBytes();
         this.cnh = " ".getBytes();
         this.cnh_expiration_date = Date.valueOf("1970-01-01");
         this.verified = false;
-        this.location = " ";
-        this.instagram = " ";
+        this.socialMediaData = new Embeddable_SocialMediaData();
     }
 
     @Lob
@@ -44,13 +44,7 @@ public class DriverUser extends RawUser{
     @Column/*(nullable = true)*/
     private Boolean verified;
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    @Column/*(nullable = true)*/
-    private String location;
-
-    @Column/*(nullable = true)*/
-    private String instagram;
+    private Embeddable_SocialMediaData socialMediaData;
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -69,11 +63,11 @@ public class DriverUser extends RawUser{
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public String getLocation(){return location;}
-    public void setLocation(String location){this.location = location;}
+    public String getLocation(){return socialMediaData.location;}
+    public void setLocation(String location){this.socialMediaData.location = location;}
 
-    public String getInstagram(){return instagram;}
-    public void setInstagram(String instagram){this.instagram = instagram;}
+    public String getInstagram(){return socialMediaData.instagram;}
+    public void setInstagram(String instagram){this.socialMediaData.instagram = instagram;}
 
 }
 

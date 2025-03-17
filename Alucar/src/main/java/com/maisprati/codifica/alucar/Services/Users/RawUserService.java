@@ -1,11 +1,19 @@
 package com.maisprati.codifica.alucar.Services.Users;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.maisprati.codifica.alucar.Exceptions.NotFoundDataException;
 import com.maisprati.codifica.alucar.Models.UserTypes.RawUser;
 import com.maisprati.codifica.alucar.Repository.DB.Users.RawUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 import static com.maisprati.codifica.alucar.Repository.DB.Users.RawUserRepository.*;

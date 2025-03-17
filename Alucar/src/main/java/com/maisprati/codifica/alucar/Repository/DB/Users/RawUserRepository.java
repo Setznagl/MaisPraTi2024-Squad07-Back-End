@@ -18,6 +18,7 @@ public interface RawUserRepository extends JpaRepository<RawUser, Long> , Generi
     // JPQL
     @Query("SELECT p FROM RawUser p WHERE p.id = :id")
     RawUser findRawUserByID(@Param("id") Long id);
+
 }
 
 

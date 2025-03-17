@@ -9,15 +9,15 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn( name = "role", discriminatorType = DiscriminatorType.STRING )
+@DiscriminatorValue("raw")
 public class RawUser {
     protected RawUser(){/*Empty constructor*/}
     public RawUser(String parameter_name , String parameter_email , String parameter_password){
         this.name = parameter_name;
         this.email = parameter_email;
         this.password = parameter_password;
-        /*
-          Dados provisórios para previnir NullPointerException
-         */
         this.cpf = " ";
         this.birthdate = Date.valueOf("1970-01-01");
         this.phone = " ";
@@ -30,45 +30,33 @@ public class RawUser {
     @JsonProperty("id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    /**
-     * Campos "birthdate" e "cpf" não constam no protótipo para cadastro, serão atribuídos ao usuário
-     * no que seria a consulta dos documentos via API que no nosso projeto será feita via JSON/Mock
-     */
-    @Column(nullable = false , length = 50)
-    @JsonProperty("name")
-    private String name;
 
     @Column(nullable = false , length = 50)
-    @JsonProperty("email")
-    private String email;
+    protected String name;
+
+    @Column(nullable = false , length = 50)
+    protected String email;
 
     @Column(nullable = false)
-    @JsonProperty("password")
-    private String password;
+    protected String password;
 
     @Column(/*(nullable = true)*/ length = 11 , unique = true )
-    @JsonProperty("cpf")
-    private String cpf;
+    protected String cpf;
 
     @Column(/*(nullable = true)*/)
-    @JsonProperty("birthdate")
-    private java.sql.Date birthdate;
+    protected java.sql.Date birthdate;
 
     @Column(/*(nullable = true)*/ length = 15)
-    @JsonProperty("phone")
-    private String phone;
+    protected String phone;
 
     @Column(/*(nullable = true)*/ length = 2)
-    @JsonProperty("average_rating")
-    private Integer average_rating;
+    protected Integer average_rating;
 
     @Column(/*(nullable = true)*/ length = 50)
-    @JsonProperty("created_at")
-    private java.sql.Timestamp created_at;
+    protected java.sql.Timestamp created_at;
 
     @Lob
-    @JsonProperty("photo")
-    private byte[] photo;
+    protected byte[] photo;
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

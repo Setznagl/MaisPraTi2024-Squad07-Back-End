@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class RawUserController_GET {
 
     //GET using Email
-    @GetMapping("/get-r-user")
+    @GetMapping("/get-r-user/")
     public ResponseEntity<RawUser> getRawUser_ByEmail(@RequestParam("email") String parameter_email) {
            boolean check_one = rawUserService.check_available_email.test(parameter_email);
            boolean check_two = rawUserService.check_email_from_rawuser.test(parameter_email);
