@@ -67,6 +67,9 @@ cd Alucar
 .\mvnw.cmd test
 ```
 
+## Lógica das entidades envolvidas:
+![Modelo Lógico](logical_model.png)
+
 ## Banco de dados com Docker
 O projeto fornece arquivos de orquestração Docker para facilitar a criação do banco MySQL. O compose para produção encontra-se em:
 ```
